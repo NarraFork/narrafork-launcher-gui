@@ -144,15 +144,15 @@ jobs:
           workspaces: src-tauri -> target
           shared-key: ${{ matrix.label }}
 
-      - name: Build Tauri app (Linux with Xvfb)
+      - name: Build Tauri app (Linux)
         if: matrix.platform == 'ubuntu-22.04'
         run: xvfb-run --auto-servernum pnpm tauri build --target ${{ matrix.rust_target }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build Tauri app (macOS/Windows)
-        if: matrix.platform != 'ubuntu-22.04'
-        uses: tauri-apps/tauri-action@v0
+      - name: Build Tauri app (macOS)
+        if: startsWith(matrix.platform, 'macos')
+        run: pnpm tauri build --target ${{ matrix.rust_target }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           APPLE_CERTIFICATE: ${{ secrets.APPLE_CERTIFICATE }}
@@ -161,9 +161,12 @@ jobs:
           APPLE_ID: ${{ secrets.APPLE_ID }}
           APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
           APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
-        with:
-          tauriScript: pnpm tauri
-          args: --target ${{ matrix.rust_target }}
+
+      - name: Build Tauri app (Windows)
+        if: startsWith(matrix.platform, 'windows')
+        run: pnpm tauri build --target ${{ matrix.rust_target }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
