@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc:*)",
+      "Bash(node -e \"console.log\\(process.platform, process.arch\\)\")",
+      "Bash(pnpm tauri:*)",
+      "Bash(~/.cargo/bin/cargo check:*)"
+    ]
+  }
+}

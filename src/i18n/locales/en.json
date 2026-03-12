@@ -1,0 +1,125 @@
+{
+  "app": {
+    "title": "NarraFork",
+    "status": {
+      "running": "Running",
+      "stopped": "Stopped",
+      "port": "Port {{port}}",
+      "uptime": "Uptime: {{time}}"
+    },
+    "actions": {
+      "start": "Start NarraFork",
+      "stop": "Stop",
+      "open": "Open NarraFork"
+    }
+  },
+  "tabs": {
+    "terminal": "Terminal",
+    "settings": "Settings",
+    "deps": "Dependencies",
+    "updates": "Updates",
+    "feedback": "Feedback"
+  },
+  "terminal": {
+    "empty": "Worker output will appear here when running..."
+  },
+  "settings": {
+    "loading": "Loading...",
+    "worker": {
+      "title": "Worker Configuration",
+      "path": "Worker Path",
+      "pathPlaceholder": "Auto-detect",
+      "port": "Port",
+      "host": "Host",
+      "autoStart": "Auto-start worker on launch"
+    },
+    "launch": {
+      "title": "Launch Settings",
+      "mode": "Launch Mode",
+      "modeInline": "Inline Browser (WebView)",
+      "modeExternal": "External Browser",
+      "closeAction": "Close Action",
+      "closeMinimize": "Minimize to Tray",
+      "closeQuit": "Quit Application"
+    },
+    "updates": {
+      "title": "Updates",
+      "autoCheck": "Auto-check for updates",
+      "channel": "Update Channel",
+      "stable": "Stable",
+      "beta": "Beta"
+    },
+    "appearance": {
+      "title": "Appearance",
+      "language": "Language",
+      "theme": "Theme",
+      "themeLight": "Light",
+      "themeDark": "Dark",
+      "themeSystem": "Follow System"
+    },
+    "data": {
+      "title": "Data Management",
+      "clearBrowsingData": "Clear Browsing Data",
+      "clearDesc": "Clear cookies, cache, and local storage for the inline browser.",
+      "clearSuccess": "Browsing data cleared",
+      "clearFail": "Failed to clear data"
+    },
+    "cancel": "Cancel",
+    "save": "Save Changes"
+  },
+  "deps": {
+    "checking": "Checking dependencies...",
+    "tools": "Required & Recommended Tools",
+    "required": "Required",
+    "install": "Install",
+    "refresh": "Refresh",
+    "git": {
+      "title": "Git Configuration",
+      "description": "Configure your Git identity for commits",
+      "name": "User Name",
+      "namePlaceholder": "Your Name",
+      "email": "Email",
+      "emailPlaceholder": "your@email.com",
+      "save": "Save Git Config"
+    }
+  },
+  "updates": {
+    "versionInfo": "Version Information",
+    "checkNow": "Check Now",
+    "checking": "Checking for updates...",
+    "currentVersion": "Current Version",
+    "latestVersion": "Latest Version",
+    "new": "New",
+    "downloading": "Downloading...",
+    "downloadInstall": "Download & Install",
+    "upToDate": "You're running the latest version!",
+    "unavailable": "Unable to check for updates",
+    "releaseNotes": "Release Notes",
+    "sw": {
+      "title": "Service Workers",
+      "desc": "Manage client-side Service Workers cache. Unregister or force update to get the latest client version.",
+      "scope": "Scope",
+      "state": "State",
+      "empty": "No Service Workers registered",
+      "notRunning": "Worker is not running",
+      "refresh": "Refresh",
+      "unregister": "Unregister All",
+      "update": "Force Update",
+      "unregisterSuccess": "Service Workers unregistered",
+      "unregisterFail": "Failed to unregister",
+      "updateSuccess": "Service Workers updated",
+      "updateFail": "Failed to update"
+    }
+  },
+  "feedback": {
+    "helpTitle": "Get Help & Report Issues",
+    "github": "GitHub Issues",
+    "bug": "Report a Bug",
+    "communityTitle": "Community",
+    "communityDesc": "Join our community to get help, share ideas, and connect with other users.",
+    "qq": "Join QQ Group",
+    "aboutTitle": "About NarraFork",
+    "aboutDesc": "NarraFork is an AI-powered collaborative programming platform that models software development as branching story networks.",
+    "madeWith": "Made with love by the NarraFork team"
+  }
+}

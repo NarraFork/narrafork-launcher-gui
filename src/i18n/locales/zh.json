@@ -1,0 +1,125 @@
+{
+  "app": {
+    "title": "NarraFork",
+    "status": {
+      "running": "运行中",
+      "stopped": "已停止",
+      "port": "端口 {{port}}",
+      "uptime": "运行时间: {{time}}"
+    },
+    "actions": {
+      "start": "启动 NarraFork",
+      "stop": "停止",
+      "open": "打开 NarraFork"
+    }
+  },
+  "tabs": {
+    "terminal": "终端",
+    "settings": "设置",
+    "deps": "依赖",
+    "updates": "更新",
+    "feedback": "反馈"
+  },
+  "terminal": {
+    "empty": "Worker 运行后输出将显示在这里..."
+  },
+  "settings": {
+    "loading": "加载中...",
+    "worker": {
+      "title": "Worker 配置",
+      "path": "Worker 路径",
+      "pathPlaceholder": "自动检测",
+      "port": "端口",
+      "host": "主机",
+      "autoStart": "启动时自动运行 Worker"
+    },
+    "launch": {
+      "title": "启动设置",
+      "mode": "启动模式",
+      "modeInline": "内置浏览器 (WebView)",
+      "modeExternal": "外部浏览器",
+      "closeAction": "关闭行为",
+      "closeMinimize": "最小化到托盘",
+      "closeQuit": "退出应用"
+    },
+    "updates": {
+      "title": "更新",
+      "autoCheck": "自动检查更新",
+      "channel": "更新通道",
+      "stable": "稳定版",
+      "beta": "测试版"
+    },
+    "appearance": {
+      "title": "外观",
+      "language": "语言",
+      "theme": "主题",
+      "themeLight": "浅色",
+      "themeDark": "深色",
+      "themeSystem": "跟随系统"
+    },
+    "data": {
+      "title": "数据管理",
+      "clearBrowsingData": "清除浏览数据",
+      "clearDesc": "清除内置浏览器的 Cookie、缓存和本地存储等数据。",
+      "clearSuccess": "浏览数据已清除",
+      "clearFail": "清除失败"
+    },
+    "cancel": "取消",
+    "save": "保存更改"
+  },
+  "deps": {
+    "checking": "正在检查依赖...",
+    "tools": "必需和推荐工具",
+    "required": "必需",
+    "install": "安装",
+    "refresh": "刷新",
+    "git": {
+      "title": "Git 配置",
+      "description": "配置你的 Git 提交身份信息",
+      "name": "用户名",
+      "namePlaceholder": "你的名字",
+      "email": "邮箱",
+      "emailPlaceholder": "your@email.com",
+      "save": "保存 Git 配置"
+    }
+  },
+  "updates": {
+    "versionInfo": "版本信息",
+    "checkNow": "立即检查",
+    "checking": "正在检查更新...",
+    "currentVersion": "当前版本",
+    "latestVersion": "最新版本",
+    "new": "新版本",
+    "downloading": "下载中...",
+    "downloadInstall": "下载并安装",
+    "upToDate": "已是最新版本！",
+    "unavailable": "无法检查更新",
+    "releaseNotes": "更新日志",
+    "sw": {
+      "title": "Service Workers",
+      "desc": "管理客户端 Service Workers 缓存。注销或强制更新以获取最新客户端版本。",
+      "scope": "作用域",
+      "state": "状态",
+      "empty": "没有已注册的 Service Workers",
+      "notRunning": "Worker 未运行",
+      "refresh": "刷新",
+      "unregister": "注销全部",
+      "update": "强制更新",
+      "unregisterSuccess": "Service Workers 已注销",
+      "unregisterFail": "注销失败",
+      "updateSuccess": "Service Workers 已更新",
+      "updateFail": "更新失败"
+    }
+  },
+  "feedback": {
+    "helpTitle": "获取帮助与报告问题",
+    "github": "GitHub Issues",
+    "bug": "报告 Bug",
+    "communityTitle": "社区",
+    "communityDesc": "加入我们的社区，获取帮助、分享想法，与其他用户交流。",
+    "qq": "加入 QQ 群",
+    "aboutTitle": "关于 NarraFork",
+    "aboutDesc": "NarraFork 是一个 AI 驱动的协作编程平台，将软件开发建模为分支故事网络。",
+    "madeWith": "由 NarraFork 团队用心打造"
+  }
+}
