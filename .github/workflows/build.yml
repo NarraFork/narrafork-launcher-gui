@@ -87,7 +87,7 @@ jobs:
             bundle_paths: |
               src-tauri/target/aarch64-apple-darwin/release/bundle/dmg/*.dmg
 
-          - platform: macos-13
+          - platform: macos-latest
             rust_target: x86_64-apple-darwin
             label: macos-x64
             bundle_paths: |
