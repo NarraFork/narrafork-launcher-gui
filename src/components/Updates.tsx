@@ -12,18 +12,25 @@ import {
 } from "@mantine/core";
 import {
   IconDownload,
+  IconFolder,
   IconRefresh,
   IconTrash,
   IconArrowUp,
 } from "@tabler/icons-react";
+import { open as dialogOpen } from "@tauri-apps/plugin-dialog";
 import { useTranslation } from "react-i18next";
-import { useUpdates, useWorkerStatus } from "../hooks/useTauri";
+import { useUpdates, useWorkerStatus, useConfig } from "../hooks/useTauri";
 import { api, type ServiceWorkerInfo } from "../lib/api";
 
 export function Updates() {
   const { t } = useTranslation();
   const { updateInfo, checking, downloading, check, download } = useUpdates();
   const { status } = useWorkerStatus();
+  const { config, save } = useConfig();
+
+  // Download worker to custom directory
+  const [workerDownloading, setWorkerDownloading] = useState(false);
+  const [workerDownloadResult, setWorkerDownloadResult] = useState<string | null>(null);
 
   // Service Workers state
   const [swList, setSwList] = useState<ServiceWorkerInfo[]>([]);
@@ -147,6 +154,39 @@ export function Updates() {
         ) : (
           <Text size="sm" c="dimmed">{t("updates.unavailable")}</Text>
         )}
+      </Paper>
+
+      {/* Download Worker */}
+      <Paper p="md" withBorder>
+        <Text fw={500} mb="xs">{t("updates.worker.title")}</Text>
+        <Text size="xs" c="dimmed" mb="md">{t("updates.worker.desc")}</Text>
+        {workerDownloadResult && (
+          <Text size="xs" c="green" mb="sm">{t("updates.worker.success", { path: workerDownloadResult })}</Text>
+        )}
+        <Button
+          leftSection={workerDownloading ? <Loader size={14} /> : <IconFolder size={14} />}
+          onClick={async () => {
+            const dir = await dialogOpen({ directory: true, multiple: false });
+            if (!dir) return;
+            setWorkerDownloading(true);
+            setWorkerDownloadResult(null);
+            try {
+              const savedPath = await api.downloadWorkerToDir(dir as string);
+              setWorkerDownloadResult(savedPath);
+              // Auto-update worker path in config
+              if (config) {
+                await save({ ...config, worker: { ...config.worker, path: savedPath } });
+              }
+            } catch (e) {
+              console.error("Download worker failed:", e);
+            } finally {
+              setWorkerDownloading(false);
+            }
+          }}
+          disabled={workerDownloading}
+        >
+          {workerDownloading ? t("updates.worker.downloading") : t("updates.worker.download")}
+        </Button>
       </Paper>
 
       {/* Release notes */}

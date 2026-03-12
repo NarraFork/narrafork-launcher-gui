@@ -133,6 +133,7 @@ pub fn run() {
             // Updates
             updater::check_for_updates,
             updater::download_update,
+            updater::download_worker_to_dir,
             updater::get_current_version,
             updater::get_pending_update,
             // Browser & Service Workers

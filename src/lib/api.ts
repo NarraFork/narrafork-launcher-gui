@@ -97,6 +97,7 @@ export const api = {
   // Updates
   checkForUpdates: () => invoke<UpdateInfo>("check_for_updates"),
   downloadUpdate: (url: string) => invoke<string>("download_update", { url }),
+  downloadWorkerToDir: (dir: string) => invoke<string>("download_worker_to_dir", { dir }),
   getCurrentVersion: () => invoke<string>("get_current_version"),
   getPendingUpdate: () => invoke<string | null>("get_pending_update"),
 

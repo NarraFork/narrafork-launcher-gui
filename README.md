@@ -136,13 +136,68 @@ pnpm install
 pnpm tauri dev
 ```
 
-### 构建发布
+### 构建当前平台
 
 ```bash
 pnpm tauri build
 ```
 
 构建产物位于 `src-tauri/target/release/bundle/` 目录。
+
+### 本地构建脚本
+
+```bash
+# Windows (PowerShell)
+.\build-all.ps1
+
+# macOS / Linux
+./build-all.sh
+```
+
+## 发布流程
+
+项目通过 GitHub Actions 自动构建全平台安装包并发布到 GitHub Releases。
+
+### 自动发布（推荐）
+
+1. 修改版本号 `src-tauri/tauri.conf.json` 中的 `version` 字段
+2. 提交时在 commit 消息中包含 `[build]` 关键字
+3. 推送到 `main` 分支
+
+```bash
+# 1. 改版本号（如 0.1.0 → 0.2.0）
+# 2. 提交并推送
+git add .
+git commit -m "feat: 新功能描述 [build]"
+git push
+```
+
+CI 会自动执行以下流程：
+
+```
+检测到 [build] → 从 tauri.conf.json 读取版本号 → 自动打 tag (v0.2.0)
+  → 4 平台并行构建 → 创建 GitHub Release 并上传安装包
+```
+
+### 手动触发
+
+在 GitHub 仓库 → Actions → Build & Release → Run workflow 手动触发。
+
+### 构建产物
+
+| 平台 | 安装包格式 |
+|------|-----------|
+| Windows x64 | `.exe` (NSIS) / `.msi` |
+| macOS arm64 (Apple Silicon) | `.dmg` |
+| macOS x64 (Intel) | `.dmg` |
+| Linux x64 | `.deb` / `.AppImage` / `.rpm` |
+
+### 注意事项
+
+- **不包含 `[build]`** 的普通 commit 不会触发构建，不消耗 CI 资源
+- 版本号来源于 `src-tauri/tauri.conf.json`，发版前务必更新
+- 如果同版本号重复发布，CI 会自动覆盖已有的 tag 和 Release
+- macOS 代码签名需要在仓库 Settings → Secrets 中配置 Apple 证书相关密钥（不配置则跳过签名）
 
 ## Worker 可执行文件检测顺序
 

@@ -31,7 +31,8 @@
       "pathPlaceholder": "Auto-detect",
       "port": "Port",
       "host": "Host",
-      "autoStart": "Auto-start worker on launch"
+      "autoStart": "Auto-start worker on launch",
+      "download": "Download Worker"
     },
     "launch": {
       "title": "Launch Settings",
@@ -94,6 +95,13 @@
     "downloadInstall": "Download & Install",
     "upToDate": "You're running the latest version!",
     "unavailable": "Unable to check for updates",
+    "worker": {
+      "title": "Download Worker",
+      "desc": "Download the latest NarraFork Worker to a specified directory. The worker path will be updated automatically after download.",
+      "download": "Select Directory & Download",
+      "downloading": "Downloading...",
+      "success": "Worker downloaded to: {{path}}"
+    },
     "releaseNotes": "Release Notes",
     "sw": {
       "title": "Service Workers",

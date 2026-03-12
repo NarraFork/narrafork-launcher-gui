@@ -31,7 +31,8 @@
       "pathPlaceholder": "自动检测",
       "port": "端口",
       "host": "主机",
-      "autoStart": "启动时自动运行 Worker"
+      "autoStart": "启动时自动运行 Worker",
+      "download": "下载 Worker"
     },
     "launch": {
       "title": "启动设置",
@@ -94,6 +95,13 @@
     "downloadInstall": "下载并安装",
     "upToDate": "已是最新版本！",
     "unavailable": "无法检查更新",
+    "worker": {
+      "title": "下载 Worker",
+      "desc": "下载最新版 NarraFork Worker 到指定目录，下载完成后将自动更新 Worker 路径配置。",
+      "download": "选择目录并下载",
+      "downloading": "下载中...",
+      "success": "Worker 已下载到: {{path}}"
+    },
     "releaseNotes": "更新日志",
     "sw": {
       "title": "Service Workers",

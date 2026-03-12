@@ -130,7 +130,7 @@ function AppContent() {
   const renderPage = () => {
     switch (activeTab) {
       case "settings":
-        return <Settings />;
+        return <Settings onNavigate={setActiveTab} />;
       case "deps":
         return <Dependencies />;
       case "updates":

@@ -12,14 +12,18 @@ import {
   SegmentedControl,
   useMantineColorScheme,
 } from "@mantine/core";
-import { IconFolder, IconTrash } from "@tabler/icons-react";
+import { IconDownload, IconFolder, IconTrash } from "@tabler/icons-react";
 import { open } from "@tauri-apps/plugin-dialog";
 import { useTranslation } from "react-i18next";
 import { useConfig } from "../hooks/useTauri";
 import { api } from "../lib/api";
 import type { LauncherConfig } from "../lib/api";
 
-export function Settings() {
+interface SettingsProps {
+  onNavigate: (tab: "terminal" | "settings" | "deps" | "updates" | "feedback") => void;
+}
+
+export function Settings({ onNavigate }: SettingsProps) {
   const { t, i18n } = useTranslation();
   const { colorScheme, setColorScheme } = useMantineColorScheme();
   const { config, loading, save } = useConfig();
@@ -142,6 +146,14 @@ export function Settings() {
             }
             styles={{ label: { pointerEvents: "none" } }}
           />
+          <Button
+            variant="light"
+            size="compact-sm"
+            leftSection={<IconDownload size={14} />}
+            onClick={() => onNavigate("updates")}
+          >
+            {t("settings.worker.download")}
+          </Button>
         </Stack>
       </Paper>
 

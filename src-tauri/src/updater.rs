@@ -184,6 +184,79 @@ pub fn get_current_version() -> String {
 }
 
 #[tauri::command]
+pub async fn download_worker_to_dir(dir: String) -> Result<String, String> {
+    // Check for latest release to find the worker download URL
+    let client = reqwest::Client::builder()
+        .user_agent("NarraFork-Launcher")
+        .build()
+        .map_err(|e| e.to_string())?;
+
+    let response = client
+        .get(GITHUB_RELEASES_URL)
+        .send()
+        .await
+        .map_err(|e| format!("Failed to check releases: {}", e))?;
+
+    if !response.status().is_success() {
+        return Err(format!("Failed to fetch releases: {}", response.status()));
+    }
+
+    let release: GithubRelease = response
+        .json()
+        .await
+        .map_err(|e| format!("Failed to parse release: {}", e))?;
+
+    let asset_name = get_platform_asset_name();
+    let download_url = release
+        .assets
+        .iter()
+        .find(|a| a.name.contains(&asset_name))
+        .map(|a| a.browser_download_url.clone())
+        .ok_or_else(|| format!("No worker binary found for this platform ({})", asset_name))?;
+
+    // Download the worker binary
+    let dl_response = client
+        .get(&download_url)
+        .send()
+        .await
+        .map_err(|e| format!("Failed to download: {}", e))?;
+
+    if !dl_response.status().is_success() {
+        return Err(format!("Download failed with status: {}", dl_response.status()));
+    }
+
+    let bytes = dl_response
+        .bytes()
+        .await
+        .map_err(|e| format!("Failed to read download: {}", e))?;
+
+    // Extract filename from URL
+    let filename = download_url
+        .split('/')
+        .last()
+        .unwrap_or(&asset_name);
+
+    let dir_path = PathBuf::from(&dir);
+    fs::create_dir_all(&dir_path).map_err(|e| format!("Failed to create directory: {}", e))?;
+
+    let file_path = dir_path.join(filename);
+    fs::write(&file_path, &bytes).map_err(|e| format!("Failed to save worker: {}", e))?;
+
+    // Make executable on Unix
+    #[cfg(unix)]
+    {
+        use std::os::unix::fs::PermissionsExt;
+        let mut perms = fs::metadata(&file_path)
+            .map_err(|e| e.to_string())?
+            .permissions();
+        perms.set_mode(0o755);
+        fs::set_permissions(&file_path, perms).map_err(|e| e.to_string())?;
+    }
+
+    Ok(file_path.to_string_lossy().to_string())
+}
+
+#[tauri::command]
 pub fn get_pending_update() -> Option<String> {
     let updates_path = updates_dir();
     if !updates_path.exists() {
